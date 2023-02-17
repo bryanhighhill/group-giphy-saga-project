@@ -5,9 +5,10 @@ require('dotenv').config();
 
 router.get('/', (req, res) => {
     console.log('inside the get route');
+    // const query = req.params
     
     //request to 3rd party API - giphy
-    axios.get(`api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}`)
+    axios.get(`api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=${query}`)
     //hide your API key with .env file and .gitignore
 
     .then((response) => {
