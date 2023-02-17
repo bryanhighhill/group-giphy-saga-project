@@ -3,9 +3,9 @@ const router = express.Router();
 const axios = require ('axios');
 require('dotenv').config();
 
-router.get('/', (req, res) => {
+router.get('/:query', (req, res) => {
     console.log('inside the get route');
-    // const query = req.params
+    console.log('req params query', req.params.query);
     
     //request to 3rd party API - giphy
     axios.get(`api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=${query}`)
