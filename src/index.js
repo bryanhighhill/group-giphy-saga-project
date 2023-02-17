@@ -21,13 +21,17 @@ function* searchGiphy(action) {
         const query = action.payload;
         const searchGiphy = yield axios.get(`/giphy/${query}`); // response
         // send data to redux, put accepts an object
-        yield put({type: 'SEARCH_RESULTS', payload: searchGiphy.data})
+        yield put({type: 'SEARCH_RESULTS', payload: searchGiphy.data.data});
     } catch (error) {
         console.log('error getting gifs', error);
     }
 }
 
-const searchResults = (state = '', action) => {
+// Create sagaMiddleware
+const sagaMiddleware = createSagaMiddleware();
+
+const searchResults = (state = [], action) => {
+    console.log('search results payload: ', action.payload);
     switch (action.type) {
         case 'SEARCH_RESULTS':
             return action.payload;
@@ -35,8 +39,6 @@ const searchResults = (state = '', action) => {
             return state;
     }
 }
-// Create sagaMiddleware
-const sagaMiddleware = createSagaMiddleware();
 
 // Create one store that all components can use
 const storeInstance = createStore(

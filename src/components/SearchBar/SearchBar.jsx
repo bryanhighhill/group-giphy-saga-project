@@ -6,7 +6,8 @@ function SearchBar() {
     const [searchTerm, setSearchTerm] = useState('');
     const dispatch = useDispatch();
     
-    const onSubmit = () => {
+    const onSubmit = (event) => {
+        event.preventDefault();
         dispatch({
             type: 'SEARCH_GIPHY',
             payload: searchTerm
